@@ -4,4 +4,13 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js')
+    script(type='text/javascript').
+      var speed = new URL(window.location.href).searchParams.get("speed");      
+      var source = new EventSource("/stream?speed="+ speed);
+
+      source.onmessage = function(e) {
+        $('#id').text(e.data);
+      };
+      
     block content
